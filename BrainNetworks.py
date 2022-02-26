@@ -40,15 +40,7 @@ def runK(A, phases0, w_nat, alpha, time):
     '''
     result = odeint(Kura, phases0, time, args=(A, w_nat, alpha)).T
     order_params = orderParameter(result)
-    order_params = np.array([abs(complex_OP2(result[:,i])) for i in range(len(result[0]))])
     return result, order_params
-
-def complex_OP2(theta):
-    '''
-    :param theta: vector of phases
-    :return: complex order parameter. Take abs() to get R.
-    '''
-    return (1.0 / len(theta)) * sum(cmath.exp(complex(0, a)) for a in theta)
 
 def orderParameter(theta):
     '''
@@ -197,6 +189,7 @@ def plot_network(net):
     plt.tight_layout()
 
 if __name__ == '__main__':
+    #hardcoded paths as an example; should change these
     filepath_ecog = 'C:/Users/billy/PycharmProjects/BrainNetworks/Time_Evolving_Controllability_EC_Data/dataSets_clean.mat'
     fpath_131 = 'C:/Users/billy/PycharmProjects/BrainNetworks/Time_Evolving_Controllability_EC_Data/HUP131-short-ictal-block-1.mat'
     fpath_084 = 'C:/Users/billy/PycharmProjects/BrainNetworks/Time_Evolving_Controllability_EC_Data/HUP084-short-ictal-block-1.mat'
